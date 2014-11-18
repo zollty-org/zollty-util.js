@@ -32,7 +32,7 @@ get the value of the given url param, e.g.:
 	  var sidValue = zt.getUrlParam("sid");
 
 
-[See Examples](http://zollty-org.github.io/zollty-util.js/examples/zt-getUrlParam-test.html)
+[See Examples](http://zollty-org.github.io/zollty-util.js/examples/zt-getUrlParam-test.html?sid=000000001)
 
 ##	Download
 
