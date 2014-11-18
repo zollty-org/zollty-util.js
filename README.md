@@ -1,4 +1,4 @@
-# Waitingbox
+# zollty-util.js
 
 A small JavaScript utility library for NodeJS and the browser.
 
