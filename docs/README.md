@@ -6,7 +6,7 @@ A small JavaScript utility library for NodeJS and the browser.
 
 ### ajaxGetText
 
-get the text content: 
+get the text content:
 
 	  // ......
 	  var text = zt.ajaxGetText(url);
@@ -16,7 +16,7 @@ get the text content:
 
 ### getBaseURL
 
-get the root path of the current page: 
+get the root path of the current page:
 
 	  // ......
 	  var baseURL = zt.getBaseURL();
@@ -36,7 +36,7 @@ get the value of the given url param, e.g.:
 
 ##	Download
 
-* [zollty-utils.js](https://raw.github.com/zollty-org/zollty-util.js/master/dist/1.0.0/zollty-utils.js) 
+* [zollty-utils.js](https://raw.github.com/zollty-org/zollty-util.js/master/dist/latest/zollty-util.min.js)
 
 
 ## Change-log
