@@ -22,9 +22,7 @@
 }(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
 
     // Define a local copy of zt
-    zt = function() {
-        return null;
-    };
+    zt = {};
 
     // Functions to create xhrs
     var getRequestObj = function() {

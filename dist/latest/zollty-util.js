@@ -2,29 +2,34 @@
  * zollty-util.js
  * A small JavaScript utility library for NodeJS and the browser.
  * http://zollty-org.github.io/zollty-util.js/
- * Version 1.1.0 (Released on 2015-06-09)
+ * Version 1.2.0 (Released on 2015-06-13)
  * Licensed under the MIT license. Please see LICENSE for more information.
  */
-(function(global, factory) {
-
-    if (typeof module === "object" && typeof module.exports === "object") {
-        module.exports = global.document ? factory(global, true) : function(w) {
-            if (!w.document) {
-                throw new Error("zt requires a window with a document");
-            }
-            return factory(w);
-        };
+(function(){
+(function(undefined){
+    // (0, eval)('this') is a robust way of getting a reference to the global object
+    // For details, see http://stackoverflow.com/questions/14119988/return-this-0-evalthis/14120023#14120023
+    var window = this || (0, eval)('this'),
+        document = window['document'],
+        navigator = window['navigator'],
+        $ = window["jQuery"],
+        JSON = window["JSON"];
+(function(factory) {
+    // Support three module loading scenarios
+    if (typeof define === 'function' && define['amd']) {
+        // [1] AMD anonymous module
+        define(['exports', 'require'], factory);
+    } else if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
+        // [2] CommonJS/Node.js
+        factory(module['exports'] || exports);  // module.exports is for Node.js
     } else {
-        factory(global);
+        // [3] No module loader (plain <script> tag) - put directly in global namespace
+        factory(window['zt'] = {});
     }
+}(function(ztExports, amdRequire){
 
-// Pass this if window is not defined yet
-}(typeof window !== "undefined" ? window : this, function(window, noGlobal) {
-
-    // Define a local copy of zt
-    zt = function() {
-        return null;
-    };
+    // Internally, all ZT objects are attached to ztExports (even the non-exported ones whose names will be minified by the closure compiler).
+    var zt = typeof ztExports !== 'undefined' ? ztExports : {};
 
     // Functions to create xhrs
     var getRequestObj = function() {
@@ -193,31 +198,55 @@
         }
     };
 
-    // ~ zt define --------Begin
 
-    if (typeof define === "function" && define.amd) {
-        define("zt", [], function() {
-            return zt;
-        });
-    }
+    // ~ jquery extent --------Bgn
 
-    //Map over zt in case of overwrite
-    var _zt = window.zt;
+    if($) {
 
-    zt.noConflict = function(deep) {
-        if (deep && window.zt === zt) {
-            window.zt = _zt;
+    // var settings = $.extend({}, {open: false}, options);
+    $.extend($.fn, {
+        /**
+         * 获取checkbox的值，用指定{split}分隔符连接
+         * @param split 分隔符
+         * @author zollty
+         * @since 2014-1-15
+         */
+        ztCheckboxValue: function(split) {
+            var chb_value = '';
+            $(this).each(function(){
+                if(typeof(split) == 'undefined')
+                    chb_value += $(this).val() + ",";
+                else
+                    chb_value += $(this).val() + split;
+            });
+            if(chb_value.length>0){
+                chb_value = chb_value.substring(0, chb_value.length-1);
+            }
+            return chb_value;
+        },
+        /**
+         * 获取checkbox的值，如果为全选，则返回"ALL"字符串
+         * @param total 总数，用于判断是否全选
+         * @author zollty
+         * @since 2014-1-15
+         */
+        ztCheckboxAll: function(total) {
+            if( $(this).size()==total ) return 'ALL';
+            var chb_value = '';
+            $(this).each(function(){
+                chb_value += $(this).val() + ",";
+            });
+            if(chb_value.length>0){
+                chb_value = chb_value.substring(0, chb_value.length-1);
+            }
+            return chb_value;
         }
-        return zt;
-    };
+    });
 
-    var strundefined = typeof undefined;
-    if (typeof noGlobal === strundefined) {
-        window.zt = zt;
     }
+    
+    // ~ jquery extent --------End
 
-    // ~ zt define ----------End
-
-    return zt;
-
-}));
+})); //end amd pre
+}()); // end extern pre
+})(); // end all
