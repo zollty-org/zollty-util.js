@@ -2,7 +2,7 @@
  * zollty-util.js
  * A small JavaScript utility library for NodeJS and the browser.
  * http://zollty-org.github.io/zollty-util.js/
- * Version 1.2.0 (Released on 2015-06-13)
+ * Version 1.2.1 (Released on 2015-07-10)
  * Licensed under the MIT license. Please see LICENSE for more information.
  */
 (function(){
@@ -30,6 +30,8 @@
 
     // Internally, all ZT objects are attached to ztExports (even the non-exported ones whose names will be minified by the closure compiler).
     var zt = typeof ztExports !== 'undefined' ? ztExports : {};
+
+    zt.version = "1.2.1";
 
     // Functions to create xhrs
     var getRequestObj = function() {
@@ -194,7 +196,11 @@
         if (typeof(returnValue) == "undefined") {
             return "";
         } else {
-            return returnValue;
+            var idx = returnValue.indexOf('#');
+            if(idx==-1) {
+                return returnValue;
+            }
+            return returnValue.substring(0, idx);
         }
     };
 
@@ -244,7 +250,7 @@
     });
 
     }
-    
+
     // ~ jquery extent --------End
 
 })); //end amd pre
