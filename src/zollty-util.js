@@ -76,9 +76,9 @@
         request.open(method, url);
         request.send(null);
     };
-    
+
     // handle XMLHttpRequest oload
-    function xhrSuccess () { 
+    function xhrSuccess () {
     	if (this.readyState === 4) {
     		if (this.status === 200) {
     			this.callback.apply(this, this.arguments);
@@ -113,19 +113,19 @@
         } else { // For all other browsers, use the standard XMLHttpRequest object
             var request = new window.XMLHttpRequest();
             request.callback = fCallback;
-    
+
             request.ontimeout = function() {
                 console.error("The request for " + url + " timed out.");
             };
-            
+
             request.arguments = Array.prototype.slice.call(arguments, 2);
             request.onload = xhrSuccess;
             request.onerror = function() {
                 console.error(this.statusText);
             };
-    
+
             request.open("GET", url, true);
-            request.timeout = 1000;
+            request.timeout = 5000;
             request.send(null);
         }
     };
