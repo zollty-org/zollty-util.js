@@ -76,6 +76,59 @@
         request.open(method, url);
         request.send(null);
     };
+    
+    // handle XMLHttpRequest oload
+    function xhrSuccess () { 
+    	if (this.readyState === 4) {
+    		if (this.status === 200) {
+    			this.callback.apply(this, this.arguments);
+    		} else {
+    			console.error(this.statusText);
+    		}
+    	}
+    }
+
+    /**
+     * 通过HTTP GET方法获取URL响应的文本内容（异步加载）
+     * @name    zt.asynGetText
+     * @param   {String}     URL
+     * @param   {function}   fCallback
+     * @param   {arguments}  ...
+     */
+    zt.asynGetText = function(url, fCallback /** , argumentToPass1, argumentToPass2, etc.*/) {
+        if( window.ActiveXObject !== undefined ) {
+            var request = new window.ActiveXObject( "Microsoft.XMLHTTP" );
+            var arr = Array.prototype.slice.call(arguments, 2);
+            request.onreadystatechange = function() {
+                // 4代表数据发送完毕
+                if ( request.readyState == 4 ) {
+                    // 0为访问的本地，200代表访问服务器成功，304代表没做修改访问的是缓存
+                    if(request.status == 200 || request.status == 0 || request.status == 304) {
+                        fCallback.apply(request, arr);
+                    }
+                }
+            };
+            request.open("GET", url, true);
+            request.send(null);
+        } else { // For all other browsers, use the standard XMLHttpRequest object
+            var request = new window.XMLHttpRequest();
+            request.callback = fCallback;
+    
+            request.ontimeout = function() {
+                console.error("The request for " + url + " timed out.");
+            };
+            
+            request.arguments = Array.prototype.slice.call(arguments, 2);
+            request.onload = xhrSuccess;
+            request.onerror = function() {
+                console.error(this.statusText);
+            };
+    
+            request.open("GET", url, true);
+            request.timeout = 1000;
+            request.send(null);
+        }
+    };
 
     // 内存缓存
     var cacheStore = zt.cacheStore = {};
