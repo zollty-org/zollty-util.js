@@ -2,7 +2,7 @@
  * zollty-util.js
  * A small JavaScript utility library for NodeJS and the browser.
  * http://zollty-org.github.io/zollty-util.js/
- * Version 1.2.1 (Released on 2015-07-10)
+ * Version 1.3.0 (Released on 2016-08-30)
  * Licensed under the MIT license. Please see LICENSE for more information.
  */
 (function(){
@@ -31,7 +31,7 @@
     // Internally, all ZT objects are attached to ztExports (even the non-exported ones whose names will be minified by the closure compiler).
     var zt = typeof ztExports !== 'undefined' ? ztExports : {};
 
-    zt.version = "1.2.1";
+    zt.version = "1.3.0";
 
     // Functions to create xhrs
     var getRequestObj = function() {
@@ -262,7 +262,6 @@
 
     if($) {
 
-    // var settings = $.extend({}, {open: false}, options);
     $.extend($.fn, {
         /**
          * 获取checkbox的值，用指定{split}分隔符连接
@@ -272,13 +271,13 @@
          */
         ztCheckboxValue: function(split) {
             var chb_value = '';
-            $(this).each(function(){
+            $(this).each(function() {
                 if(typeof(split) == 'undefined')
                     chb_value += $(this).val() + ",";
                 else
                     chb_value += $(this).val() + split;
             });
-            if(chb_value.length>0){
+            if(chb_value.length>0) {
                 chb_value = chb_value.substring(0, chb_value.length-1);
             }
             return chb_value;
@@ -292,13 +291,36 @@
         ztCheckboxAll: function(total) {
             if( $(this).size()==total ) return 'ALL';
             var chb_value = '';
-            $(this).each(function(){
+            $(this).each(function() {
                 chb_value += $(this).val() + ",";
             });
-            if(chb_value.length>0){
+            if(chb_value.length>0) {
                 chb_value = chb_value.substring(0, chb_value.length-1);
             }
             return chb_value;
+        }
+    });
+
+    $.extend({
+        /**
+        * 按顺序递归加载script
+        * @param urlArr URL数组，按顺序加载这些URL
+        * @author zollty
+        * @since 2016-8-30
+        */
+        ztLoadScript: function loadjsn(urlArr) { //递归函数
+            if (urlArr.length < 1) return;
+            var uri = urlArr.shift();
+            jQuery.ajax({
+                url: uri,
+                dataType: 'script',
+                cache: false
+            }).complete(function(jqXHR, textStatus) {
+                if (textStatus != 'success') {
+                    console.log('load script error: ' + uri);
+                }
+                loadjsn(urlArr);
+            });
         }
     });
 
