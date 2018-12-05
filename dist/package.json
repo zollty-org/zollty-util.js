@@ -1,0 +1,18 @@
+{
+    "name": "@zollty/zollty-util",
+    "version": "1.0.8",
+    "description": "common use js tools lib",
+    "homepage": "https://github.com/zollty-org/zollty-util.js",
+    "license": "MIT",
+    "keywords": [
+        "tools, util, utility, toolkit, library, lodash"
+    ],
+    "author": "zollty <zolltytsou@gmail.com> (http://blog.zollty.com/)",
+    "repository": "zollty-org/zollty-util.js",
+    "main": "zollty-util.cjs.js",
+    "module": "zollty-util.es.js",
+    "browser": "zollty-util.js",
+    "scripts": {
+        "test": "echo \"See the git project for testing details.\""
+    }
+}

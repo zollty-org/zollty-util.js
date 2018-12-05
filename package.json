@@ -1,0 +1,79 @@
+{
+  "name": "@zollty/zollty-util",
+  "version": "1.0.2",
+  "description": "common use js tools lib",
+  "scripts": {
+    "build": "node build/prepare && rollup -c && npm run teser",
+    "build:prod": "cross-env BABEL_ENV=production npm run build && node build/update",
+    "codecov": "codecov",
+    "teser": "cd tmp && terser zollty-util.js -o zollty-util.min.js -c -m --source-map \"url='zollty-util.min.js.map'\" && terser zollty-util.fe.js -o zollty-util.fe.min.js -c -m --source-map \"url='zollty-util.fe.min.js.map'\"",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "deploy": "npm run travis-deploy-once 'npm run semantic-release'",
+    "gc": "commit",
+    "lint": "eslint --ext .js ./src",
+    "prepare": "npm run build:prod",
+    "semantic-release": "semantic-release",
+    "test": "cross-env BABEL_ENV=test jest",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "keywords": [
+    "tools",
+    "util",
+    "utility",
+    "library",
+    "lodash"
+  ],
+  "license": "MIT",
+  "author": "zollty <zolltytsou@gmail.com> (http://blog.zollty.com)",
+  "homepage": "https://github.com/zollty-org/zollty-util.js",
+  "bugs": {
+    "url": "https://github.com/zollty-org/zollty-util.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zollty-org/zollty-util.js.git"
+  },
+  "main": "zollty-util.cjs.js",
+  "module": "zollty-util.esm.js",
+  "browser": "zollty-util.js",
+  "jest": {
+    "collectCoverage": true,
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-angular": "^7.0.1",
+    "@commitlint/prompt": "^7.0.0",
+    "@commitlint/prompt-cli": "^7.0.0",
+    "ajv": "^6.5.2",
+    "babel-jest": "^23.6.0",
+    "codecov": "^3.0.4",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^0.14.3",
+    "jest": "^23.6.0",
+
+    "terser": "^3.11.0",
+    "rollup": "^0.67.4",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^4.0.1",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+
+    "semantic-release": "^15.1.7",
+
+    "travis-deploy-once": "^5.0.1"
+  }
+}
