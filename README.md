@@ -35,10 +35,10 @@ console.log(toMapValue); // Function
 Can also import like
 
 ```javascript
-import zt from '@zollty/zollty-util';
+import ztu from '@zollty/zollty-util';
 
-console.log(zt.toMapKey); // Function
-console.log(zt.toMapValue); // Function
+console.log(ztu.toMapKey); // Function
+console.log(ztu.toMapValue); // Function
 ```
 
 or like this
@@ -60,7 +60,7 @@ get the key set of a map and a value array:
 const data = {"s":5, "a": 4, "b": 3, "c": 2, "d": 1}
 const vals = [4 ,3, 2]
 // we want to get the key set ["a", "b", "c"]
-const keys = zt.toMapKey(vals, data);
+const keys = ztu.toMapKey(vals, data);
 ```
 
 
@@ -72,7 +72,7 @@ get the value set of a map and a key array:
 const data = {"s":5, "a": 4, "b": 3, "c": 2, "d": 1}
 const keys = ["a", "b", "c"]
 // we want to get the value set [4, 3, 2]
-const vals = zt.toMapValue(keys, data);
+const vals = ztu.toMapValue(keys, data);
 ```
 
 ### more examples
