@@ -20,11 +20,13 @@ const plugins = [
   }),
   commonjs(),
   babel({
+    // runtimeHelpers: true,
     exclude: 'node_modules/**'
-  }),
-  // terser(),
-  filesize()
+  })
+  //, terser(),
+  , filesize()
 ];
+
 
 export default [
   // 1. 生成umd、iife、cjs
@@ -33,23 +35,23 @@ export default [
     output: [{
         file: `tmp/zollty-util.js`,
         format: 'umd',
-        name: 'zt',
+        name: 'ztu',
         // sourcemap: true
       },
       {
         file: `tmp/zollty-util.fe.js`,
         format: 'iife',
-        name: 'zt'
+        name: 'ztu'
       },
       {
         file: `tmp/zollty-util.cjs.js`,
         format: 'cjs',
-        name: 'zt'
+        name: 'ztu'
       },
       // {
       //   file: `tmp/zollty-util.es.js`,
       //   format: 'es',
-      //   name: 'zt'
+      //   name: 'ztu'
       // }
     ],
     plugins,
@@ -61,8 +63,23 @@ export default [
     output: [{
       file: `tmp/zollty-util.es.js`,
       format: 'es',
-      name: 'zt'
+      name: 'ztu'
     }],
+    plugins,
+  },
+  {
+    input: `tmp/bom.js`,
+    output: [{
+        file: `tmp/bom.js`,
+        format: 'umd',
+        name: 'bom'
+      },
+      {
+        file: `tmp/bom.fe.js`,
+        format: 'iife',
+        name: 'bom'
+      }
+    ],
     plugins,
   }
 ];

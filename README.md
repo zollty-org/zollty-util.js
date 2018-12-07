@@ -4,9 +4,11 @@
 [![npm](https://img.shields.io/npm/v/@zollty/zollty-util.svg)](https://www.npmjs.com/package/@zollty/zollty-util)
 
 
-A small JavaScript utility library.  
+A small JavaScript utility library.   
 
-Package with `rollup.js`, exported as `iife amd cmd cjs umd es6`  module.
+Package with `rollup.js`, exported as `iife amd cmd cjs umd es6`  module.  
+
+Support most modern browsers, not include `IE`. Support Node 8+.  
 
 ## Install
 

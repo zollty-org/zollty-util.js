@@ -1,9 +1,21 @@
 {
   "extends": "airbnb-base",
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true,
+    "node": true,
+    "es6": true
   },
   "rules": {
-    "linebreak-style": ["off", "windows"]
+    /**
+     * see the doc:
+     * https://eslint.org/docs/rules/
+     * https://blog.csdn.net/helpzp2008/article/details/51507428
+     **/
+    "semi": [0, "never"],
+    "semi-spacing": [2, {
+      "before": false,
+      "after": true
+    }]
   }
 }

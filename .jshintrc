@@ -1,0 +1,12 @@
+{
+  /**
+   * 如果vs code中注释报错，请在右下角底部状态栏，点击JSON，
+   * 找到“配置文件关联”，选择 JSON with Comments
+   *
+   * jshint详细配置参见：https://jshint.com/docs/options/
+   */
+  "undef": true,
+  "unused": true,
+  "esversion": 6,
+  "asi": true
+}

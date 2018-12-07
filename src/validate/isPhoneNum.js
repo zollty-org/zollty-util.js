@@ -1,9 +1,9 @@
+/**
+ * 中国三大运营商的电话号码
+ */
 const isPhoneNum = (str) => {
-    var telreg = /^[1][3,4,5,7,8][0-9]{9}$/
-    if (!telreg.test(str)) {
-        return false
-    }
-    return true
+  const reg = /^((86)?(13[0-9]|15[0-3,5-9]|18[0-9]|19[89]|17[0135678]|166|14[579])\d{8})$/
+  return reg.test(str)
 }
 
 export default isPhoneNum

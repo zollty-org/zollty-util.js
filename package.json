@@ -3,10 +3,10 @@
   "version": "1.0.2",
   "description": "common use js tools lib",
   "scripts": {
-    "build": "node build/prepare && rollup -c && npm run teser",
+    "build": "node build/prepare && rollup -c && node build/minify && npm run test && npm run lint",
     "build:prod": "cross-env BABEL_ENV=production npm run build && node build/update",
     "codecov": "codecov",
-    "teser": "cd tmp && terser zollty-util.js -o zollty-util.min.js -c -m --source-map \"url='zollty-util.min.js.map'\" && terser zollty-util.fe.js -o zollty-util.fe.min.js -c -m --source-map \"url='zollty-util.fe.min.js.map'\"",
+    "minify": "node build/minify",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "deploy": "npm run travis-deploy-once 'npm run semantic-release'",
     "gc": "commit",
@@ -36,33 +36,18 @@
   "main": "zollty-util.cjs.js",
   "module": "zollty-util.esm.js",
   "browser": "zollty-util.js",
-  "jest": {
-    "collectCoverage": true,
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "<rootDir>/build/",
-      "<rootDir>/node_modules/"
-    ]
-  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "@commitlint/cli": "^7.0.0",
-    "@commitlint/config-angular": "^7.0.1",
-    "@commitlint/prompt": "^7.0.0",
-    "@commitlint/prompt-cli": "^7.0.0",
-    "ajv": "^6.5.2",
+    "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
-    "codecov": "^3.0.4",
-    "cross-env": "^5.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "husky": "^0.14.3",
-    "jest": "^23.6.0",
-
+    "ajv": "^6.5.2",
     "terser": "^3.11.0",
+    "jest": "^23.6.0",
     "rollup": "^0.67.4",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-commonjs": "^9.2.0",
@@ -71,9 +56,14 @@
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
-
+    "codecov": "^3.1.0",
+    "cross-env": "^5.2.0",
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-angular": "^7.0.1",
+    "@commitlint/prompt": "^7.0.0",
+    "@commitlint/prompt-cli": "^7.0.0",
     "semantic-release": "^15.1.7",
-
-    "travis-deploy-once": "^5.0.1"
+    "husky": "^0.14.3",
+    "travis-deploy-once": "^5.0.9"
   }
 }

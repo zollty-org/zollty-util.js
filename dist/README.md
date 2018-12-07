@@ -6,7 +6,9 @@
 
 A small JavaScript utility library.  
 
-Package with `rollup.js`, exported as `iife amd cmd cjs umd es6`  module.
+Package with `rollup.js`, exported as `iife amd cmd cjs umd es6`  module.   
+
+Support most modern browsers, not include `IE`. Support Node 8+.   
 
 ## Install
 

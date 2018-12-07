@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>zollty-util test</title>
-  </head>
-  <body>
-    <div id="app">open the console to see result</div>
-    <!-- built files will be auto injected -->
-    <script src="../tmp/zollty-util.min.js"></script>
-    <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.core.min.js"></script>
-    <script>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>zollty-util test</title>
+</head>
+
+<body>
+  <div id="app">open the console to see result</div>
+  <!-- built files will be auto injected -->
+  <script src="../tmp/zollty-util.min.js"></script>
+  <script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.core.min.js"></script>
+  <script>
     console.log('xxxxxxxxxxxxxxxxx');
-    console.log(zt.isPhoneNum('13787655298'));
-    </script>
-  </body>
+    console.log(ztu.isPhoneNum('13787655298'));
+
+    const map = {
+      "s": 5,
+      "a": 4,
+      "b": 3,
+      "c": 2,
+      "d": 1
+    };
+    const ret = [4, 3, 2];
+    const keys = ["a", "b", "c"];
+    console.log(ztu.toMapValue(keys, map));
+
+  </script>
+</body>
+
 </html>
