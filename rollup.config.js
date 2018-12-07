@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import localResolve from 'rollup-plugin-local-resolve';
+// 显示（打印出）输出的文件size
 import filesize from 'rollup-plugin-filesize';
 import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
@@ -85,7 +86,7 @@ export default [
 ];
 
 // 注意：此处没有生成 压缩js 以及 sourcemap
-// 而是在package.json脚本里面直接调用 terser 命令来生成。
+// 为了更灵活的控制 js压缩，我单独单独写了个脚本 ，执行node build/minify来处理压缩。
 // terser是uglify-es6的增强版，因为uglify不支持es6，而uglify-es6又停止更新了，故推出了terser
 
 // import { terser } from 'rollup-plugin-terser';
