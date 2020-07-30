@@ -18,7 +18,24 @@ npm install @zollty/zollty-util
 
 ## API
 
-[See this dir](https://github.com/zollty-org/zollty-util.js/tree/master/dist)
+[See this dir](https://github.com/zollty-org/zollty-util.js/tree/master/dist)    
+
+examples:   
+```txt
+validate: 
+  isBankCard,
+  isIdCard,
+  isPhoneNum,
+  validateMobile,
+
+collection:
+  toMapKey,
+  toMapValue,
+
+string:
+  strTemplate,
+
+```
 
 ## Usage
 
@@ -35,10 +52,10 @@ console.log(toMapValue); // Function
 Can also import like
 
 ```javascript
-import ztu from '@zollty/zollty-util';
+import zt from '@zollty/zollty-util';
 
-console.log(ztu.toMapKey); // Function
-console.log(ztu.toMapValue); // Function
+console.log(zt.toMapKey); // Function
+console.log(zt.toMapValue); // Function
 ```
 
 or like this
@@ -60,7 +77,7 @@ get the key set of a map and a value array:
 const data = {"s":5, "a": 4, "b": 3, "c": 2, "d": 1}
 const vals = [4 ,3, 2]
 // we want to get the key set ["a", "b", "c"]
-const keys = ztu.toMapKey(vals, data);
+const keys = zt.toMapKey(vals, data);
 ```
 
 
@@ -72,8 +89,30 @@ get the value set of a map and a key array:
 const data = {"s":5, "a": 4, "b": 3, "c": 2, "d": 1}
 const keys = ["a", "b", "c"]
 // we want to get the value set [4, 3, 2]
-const vals = ztu.toMapValue(keys, data);
+const vals = zt.toMapValue(keys, data);
 ```
+
+### strTemplate
+
+```javascript
+  /**
+   * 替换模块字符串中的占位符
+   * ，例如s = <span id="aaa">{{a}}</span>
+   * val = {a:111}
+   * 结果为：<span id="aaa">111</span>
+   * 如果，
+   * val = [{a:111}, {a:222}]
+   * split = <br/>
+   * 结果为：
+   * <span id="aaa">111</span><br/><span id="aaa">222</span>
+   *
+   * @param {string} s 模板字符串，例如<span>{{b}}</span>
+   * @param {Object|array} val 值
+   * @param {string} split 数组分割字符
+   */
+  function strTemplate(s, val, split)
+```
+
 
 ### more examples
 please [see the code](https://github.com/zollty-org/zollty-util.js/tree/master/dist) directly.
