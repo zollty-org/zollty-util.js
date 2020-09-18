@@ -10,6 +10,9 @@ Package with `rollup.js`, exported as `iife amd cmd cjs umd es6`  module.
 
 Support most modern browsers, not include `IE`. Support Node 8+.  
 
+
+框架搭建教程：<a href="http://blog.zollty.com/b/archive/create-a-front-end-tool-library.html">打造一个类似于lodash的现代前端工具库</a>
+
 ## Install
 
 ```bash
