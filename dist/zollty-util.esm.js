@@ -1,4 +1,11 @@
+export { default as lang } from './lang.js';
+export { default as getBaseURL } from './getBaseURL.js';
+export { default as getContextPath } from './getContextPath.js';
+export { default as getLocation } from './getLocation.js';
+export { default as getUrlParam } from './getUrlParam.js';
 export { default as htmlTemplate } from './htmlTemplate.js';
+export { default as parseBaseURL } from './parseBaseURL.js';
+export { default as parseContextPath } from './parseContextPath.js';
 export { default as toMapKey } from './toMapKey.js';
 export { default as toMapValue } from './toMapValue.js';
 export { default as strTemplate } from './strTemplate.js';

@@ -1,6 +1,6 @@
 {
   "name": "@zollty/zollty-util",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "common use js tools lib",
   "scripts": {
     "build": "node build/prepare && rollup -c && node build/minify && npm run test && npm run lint",

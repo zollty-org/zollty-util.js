@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>getUrlParam test</title>
+
+<script src="../tmp/bom.min.js"></script>
+
+
+</head>
+<body>
+<br />The URL Param "sid" is: <br />
+<textarea id='result' rows="10" cols="100"></textarea>
+
+<script type="text/javascript">
+
+document.getElementById("result").innerHTML = bom.getUrlParam("sid");
+
+alert("ok");
+</script>
+</body>
+</html>
