@@ -5,7 +5,6 @@
 }(this, (function () { 'use strict';
 
   /* eslint-disable */
-
   /**
    * 将source对象中的属性扩展到target对象上， 根据指定的isKeepTarget值决定是否保留目标对象中与
    * 源对象属性名相同的属性值。
@@ -35,21 +34,19 @@
         }
       }
     }
-
     return t;
   }
 
   /* eslint-disable */
-
   /**
    * 获取当前页面路径，如：
    *    http://localhost:8080/xxx/meun.jsp
    *    或者 file:///D:/Java/workspaces/script/test.html
    */
   const getLocation = function () {
-    let ajaxLocation; // IE may throw an exception when accessing
+    let ajaxLocation;
+    // IE may throw an exception when accessing
     // a field from window.location if document.domain has been set
-
     try {
       ajaxLocation = window.location.href;
     } catch (e) {
@@ -59,52 +56,48 @@
       ajaxLocation.href = '';
       ajaxLocation = ajaxLocation.href;
     }
-
     return ajaxLocation;
   };
 
   /* eslint-disable */
+
   /**
    * 获取页面的根路径，如：http://localhost:8080/xxx/ 或者 file:///D:/
    *
    * @name parseBaseURL
    * @return {String} 页面的根路径
    */
-
   var parseBaseURL = function () {
     var ajaxLocation = getLocation();
     var pos = ajaxLocation.indexOf("?");
-
     if (pos != -1) {
       ajaxLocation = ajaxLocation.substring(0, pos);
-    } // 获取主机地址之后的目录，如： /xxx/meun.jsp
-
-
-    var pathName = window.document.location.pathname; // 截取页面的根路径，如：http://localhost:8080/xxx/ 或者 file:///D:/
-
+    }
+    // 获取主机地址之后的目录，如： /xxx/meun.jsp
+    var pathName = window.document.location.pathname;
+    // 截取页面的根路径，如：http://localhost:8080/xxx/ 或者 file:///D:/
     return ajaxLocation.substr(0, ajaxLocation.length - pathName.length + pathName.substr(1).indexOf("/") + 2);
   };
 
   /* eslint-disable */
+
   /**
    * 获取页面的根路径，如：http://localhost:8080/xxx/ 或者 file:///D:/
    *
    * @see parseBaseURL()
    */
-
   var getBaseURL = function () {
     var baseURL = sessionStorage.getItem("baseURL");
-
     if (baseURL && baseURL != null) {
       return baseURL;
     }
-
     baseURL = parseBaseURL();
     sessionStorage.setItem("baseURL", baseURL);
     return baseURL;
   };
 
   /* eslint-disable */
+
   /**
    * 获取页面的根路径，例如对于URL [http://localhost:8080/zollty-org/zollty-util/xxxx?id=3] <br>
    * 当lev<2时，得到 http://localhost:8080/zollty-org/ <br>
@@ -115,46 +108,40 @@
    *            ContextPath的路径层级，例如“/zollty-org”为1级，“/zollty-org/zollty-util”为2级
    * @return {String} 页面的根路径
    */
-
   var parseContextPath = function (lev) {
     var ajaxLocation = getLocation();
     var pos = ajaxLocation.indexOf("?");
-
     if (pos != -1) {
       ajaxLocation = ajaxLocation.substring(0, pos);
-    } // 获取主机地址之后的目录，如： /xxx/meun.jsp
-
-
+    }
+    // 获取主机地址之后的目录，如： /xxx/meun.jsp
     var pathName = window.document.location.pathname;
-
     for (var i = 1; i < lev; i++) {
       pathName = pathName.substr(pathName.substr(1).indexOf("/") + 1);
-    } // 截取页面的根路径，如：http://localhost:8080/xxx/ 或者 file:///D:/
-
-
+    }
+    // 截取页面的根路径，如：http://localhost:8080/xxx/ 或者 file:///D:/
     return ajaxLocation.substr(0, ajaxLocation.length - pathName.length + pathName.substr(1).indexOf("/") + 2);
   };
 
   /* eslint-disable */
+
   /**
    * 获取服务端的上下文根路径
    *
    * @see parseContextPath()
    */
-
   var getContextPath = function (lev) {
     var baseURL = sessionStorage.getItem("contextPath" + lev);
-
     if (baseURL && baseURL != null) {
       return baseURL;
     }
-
     baseURL = parseContextPath(lev);
     sessionStorage.getItem("contextPath" + lev, baseURL);
     return baseURL;
   };
 
   /* eslint-disable */
+
   /**
    * 获取当前路径上的参数值
    *
@@ -162,34 +149,27 @@
    * @param {String} 参数名称
    * @return {String} 参数的值 如果没有这个参数，则返回""，如果有多个值，则返回最后一个值
    */
-
   var getUrlParam = function (paramName) {
     var url = getLocation();
     var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
     var paraObj = {};
     var j;
-
     for (var i = 0; j = paraString[i]; i++) {
       paraObj[j.substring(0, j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=") + 1, j.length);
     }
-
     var returnValue = paraObj[paramName.toLowerCase()];
-
     if (typeof returnValue == "undefined") {
       return "";
     } else {
       var idx = returnValue.indexOf("#");
-
       if (idx == -1) {
         return returnValue;
       }
-
       return returnValue.substring(0, idx);
     }
   };
 
   /* eslint-disable */
-
   /**
    * 替换模块字符串中的占位符
    * ，例如s = <span id="aaa">{{a}}</span>
@@ -209,49 +189,39 @@
     if (val === null || val.length === 0) {
       return;
     }
-
     var regex = /{{(.*?)}}/g;
     var result = regex.exec(s);
     var match = [];
     var matchReg = [];
-
     while (result != null) {
       // 字符串 trim
       match.push(result[1].replace(/^\s+|\s+$/gm, ''));
       matchReg.push(new RegExp('{{' + result[1] + '}}'));
       result = regex.exec(s);
     }
-
     if (Array.isArray(val)) {
       var ret = '';
-
       for (var j = 0; j < val.length; j++) {
         var s0 = s;
         var tmp = val[j];
-
         for (var i = 0; i < match.length; i++) {
           s0 = s0.replace(matchReg[i], tmp[match[i]]);
         }
-
         if (split && j != val.length - 1) {
           s0 = s0 + split;
         }
-
         ret = ret + s0;
       }
-
       return ret;
     } else {
       for (var k = 0; k < match.length; k++) {
         s = s.replace(matchReg[k], val[match[k]]);
       }
-
       return s;
     }
   }
 
   /* eslint-disable */
-
   function htmlTemplate(id, val, split) {
     var ele = document.getElementById(id);
     ele.innerHTML = strTemplate(ele.innerHTML, val, split);
@@ -271,14 +241,11 @@
    * @param {Map} [map=''] The data map.
    * @returns {array} Returns the values keys.
    */
-  const toMapKey = (vals, map) => Object.entries(map).reduce((prev, _ref) => {
-    let [k, v] = _ref;
-
+  const toMapKey = (vals, map) => Object.entries(map).reduce((prev, [k, v]) => {
     // array.reduce用法参见：https://blog.csdn.net/qq_41702660/article/details/81949459
     if (vals.includes(v)) {
       prev.push(k);
     }
-
     return prev;
   }, []);
 
@@ -296,23 +263,20 @@
    * @param {Map} [map=''] The data map.
    * @returns {array} Returns the keys values.
    */
-  const toMapValue = (keys, map) => Object.entries(map).reduce((prev, _ref) => {
-    let [k, v] = _ref;
-
+  const toMapValue = (keys, map) => Object.entries(map).reduce((prev, [k, v]) => {
     if (keys.includes(k)) {
       prev.push(v);
     }
-
     return prev;
   }, []);
 
   /**
    * 国际标准的银行卡号（储蓄卡和信用卡），注意：不包括各个银行的企业账户
    */
-  var isBankCard = (str => {
+  var isBankCard = str => {
     const reg = /^([45][0-9]{11,15}|62[0-9]{14,17})$/;
     return reg.test(str);
-  });
+  };
 
   /**
    * 中国的身份证号码

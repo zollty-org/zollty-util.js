@@ -13,9 +13,33 @@
      * https://blog.csdn.net/helpzp2008/article/details/51507428
      **/
     "semi": [0, "never"],
-    "semi-spacing": [2, {
-      "before": false,
-      "after": true
-    }]
+    "quotes": ["error", "single"],
+    "linebreak-style": ["error", "unix"],
+    "semi-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "no-restricted-syntax": [
+      "off",
+      {
+        "selector": "ForOfStatement",
+        "message": "for..of is disallowed"
+      }
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ],
+    "object-property-newline": [
+      "error",
+      {
+        "allowAllPropertiesOnSameLine": true
+      }
+    ]
   }
 }

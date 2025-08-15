@@ -1,13 +1,16 @@
 module.exports = {
   // 默认使用 .browserslistrc 的配置
   // 具体说明参见：https://babel.docschina.org/docs/en/babel-preset-env
-  "presets": [
+  presets: [
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": "entry"
-      }
-    ]
+        useBuiltIns: "entry",
+        targets: {
+          node: "current",
+        },
+      },
+    ],
   ],
 
   // config env as follows
@@ -53,8 +56,6 @@ module.exports = {
   //       }
   //     ]
   //   ],
-  "ignore": [
-    "node_modules/**",
-    "*.test.js"
-  ]
-}
+  ignore: ["node_modules/**"],
+  sourceType: "unambiguous",
+};
